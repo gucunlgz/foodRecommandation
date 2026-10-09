@@ -30,4 +30,7 @@ temp/
 .DS_Store
 Thumbs.db
 desktop.ini
-
+.m2repo/
+.maven-local-settings.xml
+.playwright-mcp/
+qa-*.png

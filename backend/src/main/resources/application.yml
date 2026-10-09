@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: campus-food-recommendation
+  config:
+    import: optional:file:./.env[.properties]
+  profiles:
+    default: mysql
+  jackson:
+    time-zone: Asia/Shanghai
+server:
+  port: 8080
