@@ -39,6 +39,23 @@ test('recommendation cards normalize missing tags and reasons', async (t) => {
   assert.deepEqual(result.suggestions, [])
 })
 
+test('detail keeps the complete menu and selected dish', async (t) => {
+  const dish = { id: 9, name: '牛肉拉面', category: '面条', price: 18, tasteTags: ['咸鲜'], allergens: ['小麦'] }
+  reply(t, { id: 1, name: '校园面馆', menu: [dish], matchedDish: dish })
+  const item = await getItem('1')
+  assert.equal(item.menu.length, 1)
+  assert.equal(item.menu[0].price, 18)
+  assert.equal(item.matchedDish.name, '牛肉拉面')
+  assert.deepEqual(item.matchedDish.allergens, ['小麦'])
+})
+
+test('missing menu and matched dish remain safe defaults', async (t) => {
+  reply(t, { id: 1, name: '校园面馆' })
+  const item = await getItem('1')
+  assert.deepEqual(item.menu, [])
+  assert.equal(item.matchedDish, null)
+})
+
 test('missing item id gives a readable error instead of a broken link', async (t) => {
   reply(t, { name: '无编号' })
   await assert.rejects(getItem('1'), /缺少编号/)

@@ -1,0 +1,16 @@
+.search-scope{display:flex;gap:10px;padding-top:22px}
+.search-scope button{border:1px solid #e8e2da;background:#fff;color:#756d64;border-radius:999px;padding:9px 17px;font-size:12px;font-weight:800}
+.search-scope button.active{background:#e96b3c;border-color:#e96b3c;color:#fff}
+.matched-dish{margin:8px 0 10px;color:#c45d36;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-section{padding:0 0 85px}
+.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.menu-card{background:#fff;border:1px solid #eae5dd;border-radius:14px;padding:20px}
+.menu-card.highlighted{border-color:#ed8a62;box-shadow:0 8px 24px #b9785d17}
+.menu-card-top{display:flex;justify-content:space-between;align-items:center;color:#8e857a;font-size:11px}
+.menu-card-top strong{color:#cf6238;background:#fff0e8;padding:4px 7px;border-radius:5px}
+.menu-card h3{margin:14px 0 7px;font-size:18px}
+.menu-price{font-size:19px!important;font-weight:900;color:#e46c3c!important}
+.menu-price small{font-size:11px;font-weight:400;color:#978d82}
+.menu-card p{margin:8px 0;color:#81796e;font-size:12px;line-height:1.5}
+.menu-count-note{padding-bottom:55px;color:#81796e;font-size:12px}
+@media(max-width:760px){.search-scope{padding-top:14px;overflow-x:auto}.menu-grid{grid-template-columns:1fr}.menu-section{padding-bottom:48px}}

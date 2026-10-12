@@ -1,4 +1,4 @@
-import type { DataInfo, FoodItem, ListResult, RecommendationResult } from './types'
+import type { DataInfo, DishItem, FoodItem, ListResult, RecommendationResult } from './types'
 
 interface Envelope<T> { success: boolean; data?: T; message?: string }
 
@@ -23,6 +23,22 @@ function numberValue(value: unknown): number | null {
 
 function stringList(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0) : []
+}
+
+function dishItem(value: unknown): DishItem {
+  const dish = record(value)
+  const id = numberValue(dish.id)
+  if (id === null) throw new Error('服务返回的菜品数据缺少编号，请稍后重试。')
+  return {
+    id,
+    name: stringValue(dish.name, '未命名菜品'),
+    category: stringValue(dish.category, '未分类'),
+    price: numberValue(dish.price),
+    tasteTags: stringList(dish.tasteTags),
+    dietaryTags: stringList(dish.dietaryTags),
+    allergens: stringList(dish.allergens),
+    signature: dish.signature === true,
+  }
 }
 
 function foodItem(value: unknown): FoodItem {
@@ -51,6 +67,8 @@ function foodItem(value: unknown): FoodItem {
     openNow: item.openNow === true,
     dataVersion: stringValue(item.dataVersion, 'MOCK_V1'),
     dataUpdatedAt: stringValue(item.dataUpdatedAt, '未知'),
+    menu: Array.isArray(item.menu) ? item.menu.map(dishItem) : [],
+    matchedDish: item.matchedDish == null ? null : dishItem(item.matchedDish),
   }
 }
 

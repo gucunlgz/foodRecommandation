@@ -22,10 +22,11 @@ public class DiningApi {
                                     @RequestParam(required = false) String mealPeriod,
                                     @RequestParam(required = false) String excludedAllergen,
                                     @RequestParam(defaultValue = "recommended") String sort,
+                                    @RequestParam(defaultValue = "all") String searchScope,
                                     @RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "12") int size) {
         return Map.of("success", true, "data", service.list(keyword, maxPrice, taste, maxDistance,
-            minRating, openNow, mealPeriod, excludedAllergen, sort, page, size));
+            minRating, openNow, mealPeriod, excludedAllergen, sort, searchScope, page, size));
     }
 
     @GetMapping("/dining-items/{id}")

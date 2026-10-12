@@ -36,7 +36,8 @@ public class MockDataLoader {
     }
 
     @Bean
-    CommandLineRunner loadMockData(DiningRepository repository, JdbcTemplate jdbc, Environment environment) {
+    CommandLineRunner loadMockData(DiningRepository repository, DishRepository dishes,
+                                   JdbcTemplate jdbc, Environment environment) {
         return args -> {
             List<DiningItem> seed = List.of(
                 item("一食堂·川味小馆", "食堂窗口", "一食堂 2F 东侧", "川菜", 18, 320, "4.8", "麻婆豆腐饭", "🍲", "orange", "香辣,咸鲜", "午餐,晚餐", "", "大豆,小麦", "10:30-14:00|16:30-20:30"),
@@ -102,6 +103,7 @@ public class MockDataLoader {
             );
             List<String> existingNames = repository.findAll().stream().map(item -> item.name).toList();
             repository.saveAll(seed.stream().filter(item -> !existingNames.contains(item.name)).toList());
+            MenuSeedLoader.seed(repository, dishes);
             if (environment.acceptsProfiles(Profiles.of("mysql"))) {
                 for (DiningItem item : repository.findByEnabledTrue()) {
                     syncTags(jdbc, item, "TASTE", item.tasteTags);

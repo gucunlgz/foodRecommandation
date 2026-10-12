@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { Filters, Preferences } from './types'
 
-const initialFilters = (): Filters => ({ keyword: '', maxPrice: '', taste: '', maxDistance: '', minRating: '', openNow: false, mealPeriod: '', excludedAllergen: '', sort: 'recommended' })
+const initialFilters = (): Filters => ({ keyword: '', maxPrice: '', taste: '', maxDistance: '', minRating: '', openNow: false, mealPeriod: '', excludedAllergen: '', sort: 'recommended', searchScope: 'all' })
 const initialPreferences = (): Preferences => ({ budgetMax: '', taste: '', maxDistance: '', minRating: '', openNow: false, mealPeriod: '', dietaryTag: '', excludedAllergen: '' })
 
 export const useFoodStore = defineStore('food', {

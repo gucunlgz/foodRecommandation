@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import App from './App.vue'
 import './style.css'
+import './menu.css'
 
 const router = createRouter({
   history: createWebHistory(),

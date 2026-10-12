@@ -53,3 +53,20 @@ CREATE TABLE IF NOT EXISTS dining_item_tag (
     CONSTRAINT fk_item_tag_tag FOREIGN KEY (tag_id) REFERENCES tag(id) ON DELETE CASCADE,
     INDEX idx_item_tag_tag (tag_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE IF NOT EXISTS dish_item (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    dining_item_id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    price DECIMAL(8,2) NOT NULL,
+    taste_tags VARCHAR(255),
+    dietary_tags VARCHAR(255),
+    allergens VARCHAR(255),
+    signature BIT(1) NOT NULL DEFAULT b'0',
+    enabled BIT(1) NOT NULL DEFAULT b'1',
+    CONSTRAINT fk_dish_venue FOREIGN KEY (dining_item_id) REFERENCES dining_item(id) ON DELETE CASCADE,
+    UNIQUE KEY uk_dish_venue_name (dining_item_id, name),
+    INDEX idx_dish_category (category),
+    INDEX idx_dish_price (price)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

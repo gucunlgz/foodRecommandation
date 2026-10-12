@@ -1,3 +1,14 @@
+export interface DishItem {
+  id: number
+  name: string
+  category: string
+  price: number | null
+  tasteTags: string[]
+  dietaryTags: string[]
+  allergens: string[]
+  signature: boolean
+}
+
 export interface FoodItem {
   id: number
   name: string
@@ -20,15 +31,17 @@ export interface FoodItem {
   openNow: boolean
   dataVersion: string
   dataUpdatedAt: string
+  menu: DishItem[]
+  matchedDish: DishItem | null
 }
 
 export interface ListResult { content: FoodItem[]; total: number; page: number; size: number; totalPages: number }
 export interface Recommendation { item: FoodItem; score: number; reasons: string[] }
 export interface RecommendationResult { items: Recommendation[]; total: number; algorithmVersion: string; suggestions: string[] }
-export interface DataInfo { isMock: boolean; version: string; updatedAt: string; total: number; notice: string; allergenNotice: string }
+export interface DataInfo { isMock: boolean; version: string; updatedAt: string; total: number; dishTotal?: number; notice: string; allergenNotice: string }
 export interface Filters {
   keyword: string; maxPrice: string; taste: string; maxDistance: string; minRating: string;
-  openNow: boolean; mealPeriod: string; excludedAllergen: string; sort: string
+  openNow: boolean; mealPeriod: string; excludedAllergen: string; sort: string; searchScope: string
 }
 export interface Preferences {
   budgetMax: string; taste: string; maxDistance: string; minRating: string;
